@@ -1,4 +1,5 @@
 const playButton = document.querySelector(".play");
+const playButtonContainer = document.querySelector(".play-button-container");
 const colorButtons = document.querySelectorAll(".buttons .button");
 
 function wait(duration = 1000) {
@@ -28,7 +29,7 @@ const game = {
     },
 
     getButton(color) {
-        return Array.from(colorButtons).find(x => x.classList.contains(color));
+        return Array.from(colorButtons).find(x => x.dataset.color === color);
     },
 
     async checkResponse() {
@@ -64,10 +65,12 @@ const game = {
         this.level = 0;
         this.sequence = [];
         this.response = [];
+        playButtonContainer.setAttribute("style", "");
     }
 };
 
 playButton.addEventListener("click", () => {
+    playButtonContainer.setAttribute("style", "display: none");
     game.startLevel();
 });
 
