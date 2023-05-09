@@ -1,0 +1,35 @@
+.buttons {
+    display: flex;
+    width: 400px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.buttons .button {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    background-color: transparent;
+    opacity: .5;
+}
+
+.buttons .button.active,
+.buttons .button:active {
+    opacity: 1;
+}
+
+.buttons .button.green {
+    background-color: green;
+}
+
+.buttons .button.red {
+    background-color: red;
+}
+
+.buttons .button.blue {
+    background-color: blue;
+}
+
+.buttons .button.yellow {
+    background-color: yellow;
+}
