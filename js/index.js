@@ -1,8 +1,4 @@
-const playButton = document.querySelector(".play");
-const playButtonContainer = document.querySelector(".play-button-container");
-const colorButtons = document.querySelectorAll(".buttons .button");
-
-function wait(duration = 1000) {
+function wait(duration) {
     return new Promise((resolve, reject) => {
         setTimeout(function () {
             resolve();
@@ -10,17 +6,49 @@ function wait(duration = 1000) {
     });
 }
 
+function showElement(el) {
+    el.setAttribute("style", "");
+}
+
+function hideElement(el) {
+    el.setAttribute("style", "display: none");
+}
+
 const game = {
+    playButtonContainer: document.querySelector(".play-button-container"),
+    colorButtons: document.querySelectorAll(".buttons .button"),
+    levelContainer: document.querySelector(".level"),
     level: 1,
     isPlaying: false,
     sequence: [],
     response: [],
     possibleColors: ["green", "red", "blue", "yellow"],
+    
+    initialize() {
+        this.listenButtonClicks();
+    },
 
     startLevel() {
+        hideElement(this.playButtonContainer);
+        showElement(this.levelContainer);
+        
         this.isPlaying = true;
         this.generateLevel();
         this.showLevel();
+        
+        this.levelContainer.innerHTML = this.level;
+    },
+    
+    listenButtonClicks() {
+        this.colorButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                if (!game.isPlaying) return;
+        
+                const color = button.dataset.color;
+                this.response.push(color);
+                this.checkResponse();
+            });
+        });
     },
 
     generateLevel() {
@@ -29,7 +57,7 @@ const game = {
     },
 
     getButton(color) {
-        return Array.from(colorButtons).find(x => x.dataset.color === color);
+        return Array.from(this.colorButtons).find(x => x.dataset.color === color);
     },
 
     async checkResponse() {
@@ -62,24 +90,18 @@ const game = {
     },
 
     reset() {
-        this.level = 0;
+        this.level = 1;
         this.sequence = [];
         this.response = [];
-        playButtonContainer.setAttribute("style", "");
+        
+        showElement(this.playButtonContainer);
+        hideElement(this.levelContainer);
     }
 };
 
+game.initialize();
+
+const playButton = document.querySelector(".play");
 playButton.addEventListener("click", () => {
-    playButtonContainer.setAttribute("style", "display: none");
     game.startLevel();
-});
-
-colorButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        if (!game.isPlaying) return;
-
-        const color = button.dataset.color;
-        game.response.push(color);
-        game.checkResponse();
-    });
 });

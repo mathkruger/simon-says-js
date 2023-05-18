@@ -1,3 +1,8 @@
+body {
+    background-color: #373737;
+    color: #E5E4E8
+}
+
 .title {
     text-align: center;
     position: relative;
@@ -36,7 +41,7 @@
     width: 400px;
     height: 400px;
     border-radius: 50%;
-    box-shadow: 0 0 0 1px black;
+    box-shadow: 0 0 0 1px #DFDFDF;
     align-items: center;
     flex-wrap: wrap;
     overflow: hidden;
@@ -57,17 +62,23 @@
 }
 
 .buttons .button[data-color="green"] {
-    background-color: green;
+    background-color: #20AE11;
 }
 
 .buttons .button[data-color="red"] {
-    background-color: red;
+    background-color: #AE1111;
 }
 
 .buttons .button[data-color="blue"] {
-    background-color: blue;
+    background-color: #112AAE;
 }
 
 .buttons .button[data-color="yellow"] {
-    background-color: yellow;
+    background-color: #A6AE11;
+}
+
+.level {
+    font-size: 32px;
+    text-align: center;
+    font-weight: bolder;
 }
